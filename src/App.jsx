@@ -9,7 +9,8 @@ import Article from './components/Article'
 
 class App extends Component {
   state = {
-    articles: []
+    articles: [],
+    
   }
   
   componentDidMount(){
@@ -25,7 +26,7 @@ class App extends Component {
       <div className="App">
         <NavBar/>
         <Route exact path='/' render={(props) => <Articles {...props} articles={this.state.articles}/>}/>
-        <Route path='/articles/:article_id' component={Article} />
+        <Route path='/articles/:article_id' render={(props) => <Article  {...props} />}/>
       </div>
     );
   }

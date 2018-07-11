@@ -7,3 +7,11 @@ export const getAllArticles = (cb) => {
     })
     .catch(console.log)
 }
+
+export const getArticleById = (cb, url) => {
+  axios.get(`https://antariess-ncnews.herokuapp.com/api${url}`)
+    .then(res => {
+      cb(res.data.article)
+    })
+    .catch(console.log)
+}

@@ -15,9 +15,9 @@ class NavBar extends Component {
           <NavLink exact to='/'><img src={logo} alt='nc news logo' id='logo'/></NavLink>
         </div>
         <div>
-          <selector>
+          <select>
             {/* must render topics when pressed */}
-          </selector>
+          </select>
           <form>
             <input placeholder='search for article' type='text'/>
             <button type='submit'>Find!</button>
