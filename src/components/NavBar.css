@@ -1,0 +1,10 @@
+.navBar {
+  display: flex;
+  max-height: 80px;
+  justify-content: space-evenly ;
+}
+
+#logo {
+  height: 80px;
+  width: 100px;
+}
