@@ -1,10 +1,11 @@
 import React from 'react'
 import './ArticlePreview.css'
 
-const ArticlePreview = ({article}) => {
+const ArticlePreview = ({article, handleArticleClick}) => {
   return (
-    <li className='article' >
-      <h4>{article.title} from {article.belongs_to}</h4>
+    <li className='article'>
+      <h4 onClick={handleArticleClick}>{article.title}</h4>
+      <h5>from {article.belongs_to}</h5>
       <p>{`${article.body.substr(0, 150)}...`}</p>
       <div>
         <span>{article.comments}</span>
@@ -15,5 +16,6 @@ const ArticlePreview = ({article}) => {
   )
 }
 
+//li to be a Link to Article.... /articles/article._id
 
 export default ArticlePreview
