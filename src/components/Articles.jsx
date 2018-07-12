@@ -12,19 +12,12 @@ class Articles extends Component {
             <ArticlePreview
               article={article}
               key={article._id}
-              handleArticleClick={this.handleArticleClick}
             />
           );
         })}
       </ul>
     );
   }
-  handleArticleClick = e => {
-    const clickedTitle = e.target.innerText;
-    const articleId = this.props.articles.filter(
-      article => article.title === clickedTitle
-    )[0]._id;
-  };
 }
 
 export default Articles;

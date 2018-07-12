@@ -10,13 +10,15 @@ class Article extends Component {
   }
 
   componentDidMount() {
-    const cb = (newArticle) => {
+    
+    const cb = (newArticle, newComments) => {
       this.setState({
-        article: newArticle
+        article: newArticle,
+        articleComments: newComments
       })
     }
-    const url = this.props.match.url
-    api.getArticleById(cb, url)
+    const id = this.props.match.params.article_id
+    api.getArticleById(cb, id)
   }
 
   render() {
@@ -32,7 +34,7 @@ class Article extends Component {
            right-- 
            <span>{article.comments} ADD A COMMENT? MODAL</span>
         </div>
-        <Comments comments = {this.state.articleComments}/>
+        <Comments comments = {this.state.articleComments} user={this.props.user}/>
       </div>
     );
   }

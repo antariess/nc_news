@@ -7,7 +7,7 @@ const ArticlePreview = ({article, handleArticleClick}) => {
   return (
     <li className='article'>
       <Link to={`/articles/${article._id}`}> 
-        <h4 onClick={handleArticleClick}>{article.title}</h4>
+        <h4>{article.title}</h4>
         <h5>from {article.belongs_to}</h5>
         <p>{`${article.body.substr(0, 150)}...`}</p>
         <div>
