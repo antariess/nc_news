@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logo from "./nc_news_logo.png";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
 import SelectModal from "./SelectModal";
@@ -18,8 +18,8 @@ class NavBar extends Component {
           </NavLink>
         </div>
         <div>
-          <button onClick={this.toggleClick}>Topics</button>
-          {this.state.isTopicPressed && <SelectModal/>}
+          <button onClick={this.handleTopicModal}>Topics</button>
+          {this.state.isTopicPressed && <SelectModal closeModal = {this.closeTopicModal}/>}
         </div>
         <div>
           <form>
@@ -34,17 +34,17 @@ class NavBar extends Component {
     );
   }
 
-  toggleClick = e => {
-    if(this.state.isTopicPressed){
-      this.setState({      
-        isTopicPressed: false
-      })
-    } else {
-      this.setState({      
-        isTopicPressed: true
-      });
-    }
+  handleTopicModal = () => {    
+    this.setState({      
+      isTopicPressed: true
+    });
   };
+
+  closeTopicModal = () => {
+    this.setState({      
+      isTopicPressed: false
+    });
+  }
 }
 
 export default NavBar;

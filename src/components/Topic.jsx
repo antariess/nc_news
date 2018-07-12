@@ -8,25 +8,21 @@ class Topic extends Component {
     topicArticles: []
   }
 
-  componentDidMount() {
-    const cb = (newArticles) => {
-      this.setState({
-        topicArticles: newArticles
-      })
-    }
+  fetchTopics = async () => {
     const slug = this.props.match.params.topic_slug
-    api.getArticlesByTopic(cb, slug)
+    const newArticles = await api.getArticlesByTopic(slug)
+    this.setState({
+      topicArticles: newArticles
+    })
+  }
+
+  componentDidMount() {
+    this.fetchTopics()
   }
 
   componentDidUpdate(prevProps) {
     if(prevProps !== this.props){
-      const cb = (newArticles) => {
-        this.setState({
-          topicArticles: newArticles
-        })
-      }
-      const slug = this.props.match.params.topic_slug
-      api.getArticlesByTopic(cb, slug)
+      this.fetchTopics()
     }
   }
 

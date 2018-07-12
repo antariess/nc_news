@@ -8,9 +8,7 @@ class UserModal extends Component {
     userInfo: {}
   }
   async componentDidMount() {
-    console.log('mounted')
     const newUserInfo = await api.getUserInfo(this.props.username)
-    console.log(newUserInfo)
     this.setState({
       userInfo: newUserInfo
     })

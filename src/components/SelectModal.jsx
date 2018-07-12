@@ -1,19 +1,35 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import * as api from '../api'
 
 import './Modals.css'
 
-const SelectModal = () => {
-  return (
-    <div className='modal'>
-      <div className='modalContent'>
-        <Link to='/cooking/articles'><p>cooking</p></Link>
-        <Link to='/coding/articles'><p>coding</p></Link>
-        <Link to='/football/articles'><p>football</p></Link>
+class SelectModal extends React.Component{
+  state = {
+    topics: []
+  }
+
+  async componentDidMount() {
+    const newTopics = await api.fetchAllTopics()
+    this.setState({
+      topics: newTopics
+    })
+  }
+
+  render() {
+    const topics = this.state.topics
+    return (
+      <div className='modal'>
+        <div className='modalContent'>
+          {topics.map(topic => {
+            console.log(topic)
+            return <Link to={`/${topic.slug}/articles`}>{topic.title}<br/></Link>
+          })}
+          <button onClick={this.props.closeModal}>Close</button>
+        </div>
       </div>
-    </div>
-    //when pressed a link from above needs to rerender the articles in topic
-  )
+    )
+  }
 }
 
 export default SelectModal

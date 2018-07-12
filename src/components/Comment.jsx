@@ -1,7 +1,6 @@
 import React from 'react'
 import UserModal from './UserModal'
 
-
 class Comment extends React.Component {
   state = {
     isUserModalVisible: false

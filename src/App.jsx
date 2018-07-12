@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Redirect} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import * as api from './api'
 import './App.css';
 
@@ -14,13 +14,11 @@ class App extends Component {
     userLoggedIn: ''
   }
   
-  componentDidMount(){
-    api.getAllArticles((newArticles) => {
-      //sort articles by popularity?
-      this.setState({
-        articles: newArticles
-      })
-    })  
+  async componentDidMount(){
+    const newArticles = await api.getAllArticles()
+    this.setState({
+      articles: newArticles
+    })
   }
 
   render() {
@@ -32,9 +30,7 @@ class App extends Component {
         <Route path='/:topic_slug/articles' render={(props) => <Topic {...props}/>}/>
       </div>
     );
-  }
-
-  
+  }  
 }
 
 export default App;

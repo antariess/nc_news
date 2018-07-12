@@ -15,22 +15,20 @@ class ArticlePreview extends React.Component {
       <li className='article'>
         <Link to={`/articles/${article._id}`}> 
           <h4>{article.title}</h4>
-          </Link>
-          <h5>from {article.belongs_to}</h5>
-          <p>{`${article.body.substr(0, 150)}...`}</p>
-          <div>
-            <span>{article.comments}</span>
-            <span>{article.votes}</span>
-            <span onClick={this.handleUserModal}>{article.created_by}</span>   
-            <span>{this.state.isUserModalVisible && <UserModal username = {article.created_by} closeModal={this.closeModal}/>}</span>     
-          </div>
-        
+        </Link>
+        <h5>from {article.belongs_to}</h5>
+        <p>{`${article.body.substr(0, 150)}...`}</p>
+        <div>
+          <span>{article.comments}</span>
+          <span>{article.votes}</span>
+          <span onClick={this.handleUserModal}>{article.created_by}</span>   
+          <span>{this.state.isUserModalVisible && <UserModal username = {article.created_by} closeModal={this.closeModal}/>}</span>     
+        </div>        
       </li>
     )
   }
 
   handleUserModal = (e) => {
-    console.log('i got clicked')
     this.setState({
       isUserModalVisible: true
     })
