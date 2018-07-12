@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import * as api from '../api';
+
+import Articles from './Articles'
 
 class Topic extends Component {
   state = {
@@ -6,13 +9,31 @@ class Topic extends Component {
   }
 
   componentDidMount() {
-    //axios.get articles by topic slug
+    const cb = (newArticles) => {
+      this.setState({
+        topicArticles: newArticles
+      })
+    }
+    const slug = this.props.match.params.topic_slug
+    api.getArticlesByTopic(cb, slug)
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps !== this.props){
+      const cb = (newArticles) => {
+        this.setState({
+          topicArticles: newArticles
+        })
+      }
+      const slug = this.props.match.params.topic_slug
+      api.getArticlesByTopic(cb, slug)
+    }
   }
 
   render() {
     return (
       <div>
-        <h2>TITLEEEE of topic</h2>
+        <h2>{this.props.match.params.topic_slug}</h2>
         <Articles articles = {this.state.topicArticles}/>
       </div>
     );

@@ -18,3 +18,18 @@ export const getArticleById = (cb, id) => {
     })
     .catch(console.log)
 }
+
+export const getArticlesByTopic = (cb, slug) => {
+  axios.get(`https://antariess-ncnews.herokuapp.com/api/topics/${slug}/articles`)
+    .then(res => {
+      cb(res.data.articles)
+    })
+    .catch(console.log)
+}
+
+export const getAllTopics = (cb) => {
+  axios.get(`https://antariess-ncnews.herokuapp.com/api/topics`)
+    .then(res => {
+      cb(res.data.topics)
+    })
+}
