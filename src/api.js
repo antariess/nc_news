@@ -33,3 +33,12 @@ export const getAllTopics = (cb) => {
       cb(res.data.topics)
     })
 }
+
+export const getUserInfo = (username) => {
+   return axios.get(`https://antariess-ncnews.herokuapp.com/api/users/${username}`)
+    .then(res => {
+      console.log(res.data.user)
+      return res.data.user
+    })
+    .catch(console.log)
+}

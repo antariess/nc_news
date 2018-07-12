@@ -1,10 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+import './Modals.css'
+
 const SelectModal = () => {
   return (
-    <div className='selectModal'>
-      <div className='selectModalComponent'>
+    <div className='modal'>
+      <div className='modalContent'>
         <Link to='/cooking/articles'><p>cooking</p></Link>
         <Link to='/coding/articles'><p>coding</p></Link>
         <Link to='/football/articles'><p>football</p></Link>

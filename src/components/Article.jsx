@@ -6,7 +6,8 @@ class Article extends Component {
   state = {
     article: {},
     isUserVisible: false,
-    articleComments: []
+    articleComments: [],
+    
   }
 
   componentDidMount() {
