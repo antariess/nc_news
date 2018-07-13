@@ -1,9 +1,11 @@
 import React from 'react'
 import UserModal from './UserModal'
+import Vote from './Vote'
+
 
 class Comment extends React.Component {
   state = {
-    isUserModalVisible: false
+    isUserModalVisible: false,
   }
 
   render() {
@@ -14,7 +16,7 @@ class Comment extends React.Component {
         <p onClick={this.handleUserModal}>{comment.created_by}</p>
         <span>{this.state.isUserModalVisible && <UserModal username = {comment.created_by} closeModal={this.closeModal}/>}</span>     
         <div>
-          <span>upvote button {comment.votes} dpwn button</span>
+          <Vote votes={comment.votes} ID={comment._id} upvoteCall = {this.props.upvoteCall}/>
           <span>if created by user is same as user from props - delete button</span>
         </div>
       </li>
@@ -30,7 +32,7 @@ class Comment extends React.Component {
     this.setState({
       isUserModalVisible: false
     })
-  }
+  }    
 }
 
 export default Comment

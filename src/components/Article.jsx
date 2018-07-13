@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import Comments from './Comments'
-import * as api from '../api'
+import Comments from './Comments';
+import * as api from '../api';
+import Vote from './Vote';
 
 class Article extends Component {
   state = {
     article: {},
-    isUserVisible: false,
-    articleComments: [],
-    
+    isUserVisible: false   
   }
 
   async componentDidMount() {    
     const id = this.props.match.params.article_id
-    const newData = await api.getArticleById(id)
+    const newArticle = await api.getArticleById(id)
     this.setState({
-      article: newData[0],
-      articleComments: newData[1].data.comments
+      article: newArticle
     })
   }
 
@@ -28,13 +26,17 @@ class Article extends Component {
         <p>{article.body}</p>
         <p>{article.created_by}</p>
         <div>
-          <span>button up {article.votes} button down</span>
-           right-- 
+          <Vote votes={article.votes} ID={article._id} upvoteCall={this.upvoteCall}/>
            <span>{article.comments} ADD A COMMENT? MODAL</span>
         </div>
-        <Comments comments = {this.state.articleComments}/>
+        <Comments id = {this.props.match.params.article_id}/>
       </div>
     );
+  }
+
+  upvoteCall = (articleID, direction) => {
+    api.upvoteArticle(articleID, direction)
+      .catch(console.log)
   }
 }
 
