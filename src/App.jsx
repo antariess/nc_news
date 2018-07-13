@@ -29,7 +29,7 @@ class App extends Component {
         <NavBar logIn={this.logIn} avatar={this.state.userLoggedIn.avatar_url}/>
         <Route exact path='/' render={(props) => <Articles {...props} articles={this.state.articles}/>}/>
         <Route path='/articles/:article_id' render={(props) => <Article  {...props} user={this.state.userLoggedIn}/>}/>
-        <Route path='/:topic_slug/articles' render={(props) => <Topic {...props}/>}/>
+        <Route path='/:topic_slug/articles' render={(props) => <Topic {...props} user={this.state.userLoggedIn}/>}/>
       </div>
     );
   }  

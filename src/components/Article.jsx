@@ -6,7 +6,7 @@ import Vote from './Vote';
 class Article extends Component {
   state = {
     article: {},
-    isUserVisible: false   
+    posted: false
   }
 
   async componentDidMount() {    
@@ -18,6 +18,7 @@ class Article extends Component {
   }
 
   render() {
+    console.log(this.props.user)
     const article = this.state.article
     return (
       <div>
@@ -27,9 +28,9 @@ class Article extends Component {
         <p>{article.created_by}</p>
         <div>
           <Vote votes={article.votes} ID={article._id} upvoteCall={this.upvoteCall}/>
-           <span>{article.comments} ADD A COMMENT? MODAL</span>
+           <span>{article.comments}</span>
         </div>
-        <Comments id = {this.props.match.params.article_id}/>
+        <Comments user = {this.props.user} id = {this.props.match.params.article_id}/>
       </div>
     );
   }
@@ -38,6 +39,8 @@ class Article extends Component {
     api.upvoteArticle(articleID, direction)
       .catch(console.log)
   }
+
+  
 }
 
 export default Article;
