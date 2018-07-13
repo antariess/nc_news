@@ -22,10 +22,9 @@ class SelectModal extends React.Component{
       <div className='modal'>
         <div className='modalContent'>
           {topics.map(topic => {
-            console.log(topic)
             return <Link to={`/${topic.slug}/articles`}>{topic.title}<br/></Link>
           })}
-          <button onClick={this.props.closeModal}>Close</button>
+          <button onClick={() => this.props.closeModal('isTopicPressed')}>Close</button>
         </div>
       </div>
     )

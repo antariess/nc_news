@@ -4,10 +4,12 @@ import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
 import SelectModal from "./SelectModal";
+import NewUSerModal from "./NewUserModal";
 
 class NavBar extends Component {
   state = {
-    isTopicPressed: false
+    isTopicPressed: false,
+    isUserPressed: false
   };
   render() {
     return (
@@ -18,8 +20,8 @@ class NavBar extends Component {
           </NavLink>
         </div>
         <div>
-          <button onClick={this.handleTopicModal}>Topics</button>
-          {this.state.isTopicPressed && <SelectModal closeModal = {this.closeTopicModal}/>}
+          <button onClick={() => this.handleModal('isTopicPressed')}>Topics</button>
+          {this.state.isTopicPressed && <SelectModal closeModal = {this.closeModal}/>}
         </div>
         <div>
           <form>
@@ -28,21 +30,22 @@ class NavBar extends Component {
           </form>
         </div>
         <div>
-          <button>UserIcon</button>
+          <button onClick={() => this.handleModal('isUserPressed')}><img className='image' alt ='button to log in or user avatar' src={this.props.avatar}/></button>
+          {this.state.isUserPressed && <NewUSerModal logIn={this.props.logIn} closeModal = {this.closeModal}/>}
         </div>
       </div>
     );
   }
 
-  handleTopicModal = () => {    
-    this.setState({      
-      isTopicPressed: true
-    });
-  };
+  handleModal = (name) => {
+    this.setState({
+      [name]: true
+    })
+  }
 
-  closeTopicModal = () => {
+  closeModal = (name) => {
     this.setState({      
-      isTopicPressed: false
+      [name]: false
     });
   }
 }

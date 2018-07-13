@@ -34,6 +34,7 @@ export const fetchAllTopics = () => {
 }
 
 export const getUserInfo = (username) => {
+  console.log('i get a user')
    return axios.get(`https://antariess-ncnews.herokuapp.com/api/users/${username}`)
     .then(res => res.data.user)
     .catch(console.log)
@@ -47,4 +48,11 @@ export const upvoteComment = (commentId, direction) => {
 export const upvoteArticle = (articleID, direction) => {
   return axios.put(`https://antariess-ncnews.herokuapp.com/api/articles/${articleID}?vote=${direction}`)
     .then(res => res.data.article)
+}
+
+export const newArticle = (slug) => {
+  return axios.post(`https://antariess-ncnews.herokuapp.com/api/topics/${slug}/articles`)
+    .then(res => {
+      console.log(res)
+    })
 }
