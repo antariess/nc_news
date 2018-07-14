@@ -10,6 +10,9 @@ class Comments extends React.Component {
 
   async componentDidMount() {
     const newComments = await api.fetchCommentsByArticleId(this.props.id)
+    newComments.sort((a, b) => {
+      return b.created_at - a.created_at
+    })
     this.setState({
       comments: newComments
     })
@@ -52,6 +55,7 @@ class Comments extends React.Component {
     }
   }
 
+  //delete functionality
   removeComment = async(commentId) => {
     await api.deleteComment(commentId)
     const newComments = this.state.comments.filter(comment => {

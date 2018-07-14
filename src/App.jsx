@@ -7,6 +7,7 @@ import NavBar from './components/NavBar'
 import Articles from './components/Articles'
 import Article from './components/Article'
 import Topic from './components/Topic'
+import Footer from './components/Footer';
 
 class App extends Component {
   state = {
@@ -18,6 +19,11 @@ class App extends Component {
   
   async componentDidMount(){
     const newArticles = await api.getAllArticles()
+    newArticles.sort((a, b) => {
+      const aScore = a.votes + a.comments
+      const bScore = b.votes + b.comments
+      return bScore - aScore
+    })
     this.setState({
       articles: newArticles
     })
@@ -30,6 +36,7 @@ class App extends Component {
         <Route exact path='/' render={(props) => <Articles {...props} articles={this.state.articles}/>}/>
         <Route path='/articles/:article_id' render={(props) => <Article  {...props} user={this.state.userLoggedIn}/>}/>
         <Route path='/:topic_slug/articles' render={(props) => <Topic {...props} user={this.state.userLoggedIn}/>}/>
+        <Footer/>
       </div>
     );
   }  

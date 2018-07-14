@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 import './ArticlePreview.css'
-import UserModal from './UserModal'
+import UserModal from './Modals/UserModal'
 
 class ArticlePreview extends React.Component {
   state = {

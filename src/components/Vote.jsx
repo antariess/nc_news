@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class Vote extends Component {
   state = {
     vote: false

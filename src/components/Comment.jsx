@@ -1,5 +1,5 @@
 import React from 'react'
-import UserModal from './UserModal'
+import UserModal from './Modals/UserModal'
 import Vote from './Vote'
 
 class Comment extends React.Component {

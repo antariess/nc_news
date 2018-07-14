@@ -3,14 +3,16 @@ import logo from "./nc_news_logo.png";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
-import SelectModal from "./SelectModal";
-import NewUSerModal from "./NewUserModal";
+import SelectModal from "./Modals/SelectModal";
+import NewUSerModal from "./Modals/NewUserModal";
 
 class NavBar extends Component {
   state = {
     isTopicPressed: false,
     isUserPressed: false
   };
+
+
   render() {
     return (
       <div className="navBar">

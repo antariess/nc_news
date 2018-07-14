@@ -10,7 +10,10 @@ class NewUSerModal extends Component {
     return (
       <div className='modal'>
         <div className='modalContent'>
-          <form onSubmit={(e) => this.props.logIn(e, this.state.inputText)}>
+          <form onSubmit={(e) => {
+            this.props.closeModal('isUserPressed')
+            this.props.logIn(e, this.state.inputText)
+          }}>
             <p>Whats your username?</p>
             <input type='text' onChange={this.handleOnChange} value={this.state.inputText}/>
             <button type='submit'>Log in!</button>
