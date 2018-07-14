@@ -21,7 +21,7 @@ class Comments extends React.Component {
         <NewComment postNewComment={this.postNewComment}/>
         <ul>
           {this.state.comments.map(comment => {
-            return <Comment key={comment._id} comment={comment} upvoteCall = {this.upvoteCall}/>
+            return <Comment key={comment._id} comment={comment} upvoteCall = {this.upvoteCall} user={this.props.user} removeComment={this.removeComment}/>
           })}
         </ul>
       </div>
@@ -50,6 +50,16 @@ class Comments extends React.Component {
 
       })
     }
+  }
+
+  removeComment = async(commentId) => {
+    await api.deleteComment(commentId)
+    const newComments = this.state.comments.filter(comment => {
+      return comment._id !== commentId
+    })
+    this.setState({
+      comments: newComments
+    })
   }
 }
 

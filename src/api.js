@@ -63,3 +63,9 @@ export const newComment = (articleId, comment) => {
     })
     .catch(console.log)
 }
+
+export const deleteComment = (commentId) => {
+  return axios.delete(`https://antariess-ncnews.herokuapp.com/api/comments/${commentId}`)
+    .then(console.log)
+    .catch(console.log)
+}

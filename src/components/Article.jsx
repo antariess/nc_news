@@ -18,7 +18,6 @@ class Article extends Component {
   }
 
   render() {
-    console.log(this.props.user)
     const article = this.state.article
     return (
       <div>
