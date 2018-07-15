@@ -10,7 +10,8 @@ class Article extends Component {
     article: {},
     posted: false,
     isUserModalVisible: false,
-    invalidUrl: false
+    invalidUrl: false,
+    voteGoneWrong: false
   }
 
   componentDidMount() {    
@@ -32,6 +33,7 @@ class Article extends Component {
   render() {
     const article = this.state.article
     return this.state.invalidUrl ? (<Redirect to='/404'/>)
+    : this.state.voteGoneWrong ? (<Redirect to='/400'/>)
     : (
       <div>
         <h3>{article.title}</h3>

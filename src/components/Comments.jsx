@@ -7,7 +7,7 @@ import NewComment from './CommentNew'
 class Comments extends React.Component {
   state = {
     comments: [],
-    failedNewComment: false
+    badRequest: false
   }
 
   async componentDidMount() {
@@ -21,7 +21,7 @@ class Comments extends React.Component {
   }
 
   render() {
-    return this.state.failedNewComment
+    return this.state.badRequest
     ? <Redirect to='/400'/>
     : (
       <div>
@@ -36,9 +36,15 @@ class Comments extends React.Component {
     )
   }
 
+  //upvoting
+
   upvoteCall = (commentID, direction) => {
     api.upvoteComment(commentID, direction)
-      .catch(console.log)
+      .catch(err => {
+        this.setState({
+          badRequest:true
+        })
+      })
   }
 
   //new comment functionality
@@ -57,7 +63,7 @@ class Comments extends React.Component {
       })
     } else {
       this.setState({
-        failedNewComment: true
+        badRequest: true
       })
     }
   }

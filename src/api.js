@@ -20,14 +20,10 @@ export const fetchCommentsByArticleId = (id) => {
 
 export const getArticlesByTopic = (slug) => {
   return axios.get(`https://antariess-ncnews.herokuapp.com/api/topics/${slug}/articles`)
-    .then(res => res.data.articles)
-    .catch(console.log)
 }
 
 export const fetchAllTopics = () => {
   return axios.get(`https://antariess-ncnews.herokuapp.com/api/topics`)
-    .then(res => res.data.topics)
-    .catch(console.log)
 }
 
 export const getUserInfo = (username) => {

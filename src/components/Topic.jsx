@@ -10,12 +10,15 @@ class Topic extends Component {
     topicArticles: [],
     isNewArticleModalPressed: false,
     redirectToArticle: '',
+    errorNewPost: false,
     invalidUrl: false
   }
 
   render() {
-    return this.state.invalidUrl
+    return this.state.errorNewPost
     ? <Redirect to='/400'/>
+    : this.state.invalidUrl 
+    ? <Redirect to='/404'/>
     : this.state.redirectToArticle 
     ? <Redirect to={`/articles/${this.state.redirectToArticle}`} /> 
     : <div>
@@ -26,21 +29,29 @@ class Topic extends Component {
       </div>
   }
 
-  fetchTopics = async () => {
+  fetchArticlesByTopic = async () => {
     const slug = this.props.match.params.topic_slug
-    const newArticles = await api.getArticlesByTopic(slug)
-    this.setState({
-      topicArticles: newArticles
-    })
+    await api.getArticlesByTopic(slug)
+      .then(res => {
+        const newArticles = res.data.articles
+        this.setState({
+          topicArticles: newArticles
+        })
+      })
+      .catch(err => {
+        this.setState({
+          invalidUrl:true
+        })
+      })
   }
 
   componentDidMount() {
-    this.fetchTopics()
+    this.fetchArticlesByTopic()
   }
 
   componentDidUpdate(prevProps) {
     if(prevProps !== this.props){
-      this.fetchTopics()
+      this.fetchArticlesByTopic()
     }
   }
 
@@ -73,7 +84,7 @@ class Topic extends Component {
       })
     } else {
       this.setState({
-        invalidUrl: true
+        errorNewPost: true
       })
     }
   }

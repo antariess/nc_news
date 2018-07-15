@@ -1,24 +1,36 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import * as api from '../../api'
 
 import './Modals.css'
 
 class SelectModal extends React.Component{
   state = {
-    topics: []
+    topics: [],
+    invalidUrl: false
   }
 
-  async componentDidMount() {
-    const newTopics = await api.fetchAllTopics()
-    this.setState({
-      topics: newTopics
-    })
+  componentDidMount() {
+    api.fetchAllTopics()
+      .then(res => {
+        const newTopics = res.data.topics
+        this.setState({
+          topics: newTopics
+        })
+      })
+      .catch(err => {
+        this.setState({
+          invalidUrl: true
+        })
+      })
+    
   }
 
   render() {
     const topics = this.state.topics
-    return (
+    return this.state.invalidUrl 
+    ? <Redirect to='/404'/>
+    : (
       <div className='modal'>
         <div className='modalContent'>
           {topics.map(topic => {
