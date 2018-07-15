@@ -19,6 +19,15 @@
   padding-top: 10px;
 }
 
+.link {
+  color: #CE002E
+}
+
+.input {
+  display: inline;
+  max-width: 300px;
+}
+
 .avatar {
   height: 50px;
 }

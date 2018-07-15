@@ -2,7 +2,8 @@ import React from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import * as api from '../../api'
 
-import './Modals.css'
+import 'bulma/css/bulma.css'
+// import './Modals.css'
 
 class SelectModal extends React.Component{
   state = {
@@ -22,8 +23,7 @@ class SelectModal extends React.Component{
         this.setState({
           invalidUrl: true
         })
-      })
-    
+      })    
   }
 
   render() {
@@ -32,11 +32,14 @@ class SelectModal extends React.Component{
     ? <Redirect to='/404'/>
     : (
       <div className='modal'>
-        <div className='modalContent'>
+        <div className='modal-background'></div>
+        <div className='modal-content'>
           {topics.map(topic => {
-            return <Link key={topic.slug} to={`/${topic.slug}/articles`} onClick={() => this.props.closeModal('isTopicPressed')}>{topic.title}<br/></Link>
+            return <button className='button is-medium is-danger is-inverted link' key={topic.slug}>
+              <Link  to={`/${topic.slug}/articles`} onClick={() => this.props.closeModal('isTopicPressed')}>{topic.title}<br/></Link>
+              </button>
           })}
-          <button onClick={() => this.props.closeModal('isTopicPressed')}>Close</button>
+          <button className='button is-medium is-outlined' onClick={() => this.props.closeModal('isTopicPressed')}>Close</button>
         </div>
       </div>
     )

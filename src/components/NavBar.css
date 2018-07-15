@@ -1,14 +1,8 @@
-.navBar {
-  display: flex;
-  max-height: 80px;
-  justify-content: space-evenly ;
-}
-
-#logo {
-  height: 80px;
-  width: 100px;
-}
-
-.image {
-  height: 50px;
+.navbar {
+  width: 64vw;
+  margin: auto;
+  margin-bottom: 40px;
+  background-color: #252C2F;
+  min-height: 3rem;
+  color: #E7E6E8;
 }

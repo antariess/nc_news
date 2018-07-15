@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Route, Redirect, Switch} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import * as api from './api'
-import './App.css';
+import 'bulma/css/bulma.css'
 
 import NavBar from './components/NavBar'
 import Articles from './components/Articles'
@@ -18,9 +18,7 @@ class App extends Component {
   state = {
     articles: [],
     incorrectUsername: false,
-    userLoggedIn: {
-      avatar_url: 'https://cdn3.iconfinder.com/data/icons/black-easy/512/538303-user_512x512.png'
-    },
+    userLoggedIn: {},
     invalidUrl: false
   }
   

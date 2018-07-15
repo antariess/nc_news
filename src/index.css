@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Serif:400,700");
 
 body {
-  margin: 0;
+  display: flex;
+  flex-direction: column;
   padding: 0;
   font-family: 'Noto Serif', sans-serif;
-  background-color: #C2C1C3;
-  color: #252C2F;
+  color: #C2C1C3;
+  background-color: #252C2F;
 }
