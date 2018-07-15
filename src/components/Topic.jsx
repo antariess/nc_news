@@ -9,15 +9,18 @@ class Topic extends Component {
   state = {
     topicArticles: [],
     isNewArticleModalPressed: false,
-    redirectToArticle: ''
+    redirectToArticle: '',
+    invalidUrl: false
   }
 
   render() {
-    return this.state.redirectToArticle 
+    return this.state.invalidUrl
+    ? <Redirect to='/400'/>
+    : this.state.redirectToArticle 
     ? <Redirect to={`/articles/${this.state.redirectToArticle}`} /> 
     : <div>
         <h2>{this.props.match.params.topic_slug}</h2>
-        <button onClick={this.handleNewArticleModal}>post new article</button>
+        {this.props.user._id && <button onClick={this.handleNewArticleModal}>post new article</button>}
         {this.state.isNewArticleModalPressed && <NewArticle postNewArticle={this.postNewArticle} closeModal={this.closeModal}/>}
         <Articles articles = {this.state.topicArticles}/>
       </div>
@@ -64,9 +67,13 @@ class Topic extends Component {
       belongs_to: slug
     }
     const postedArticle = await api.newArticle(slug, article)
-    if(postedArticle._id){
+    if(postedArticle){
       this.setState({
         redirectToArticle: postedArticle._id
+      })
+    } else {
+      this.setState({
+        invalidUrl: true
       })
     }
   }

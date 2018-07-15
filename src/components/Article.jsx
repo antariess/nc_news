@@ -1,27 +1,38 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 import Comments from './Comments';
 import * as api from '../api';
 import Vote from './Vote';
-import UserModal from './Modals/UserModal'
+import UserModal from './Modals/UserModal';
 
 class Article extends Component {
   state = {
     article: {},
     posted: false,
-    isUserModalVisible: false
+    isUserModalVisible: false,
+    invalidUrl: false
   }
 
-  async componentDidMount() {    
+  componentDidMount() {    
     const id = this.props.match.params.article_id
-    const newArticle = await api.getArticleById(id)
-    this.setState({
-      article: newArticle
-    })
+    api.getArticleById(id)
+      .then(res => {
+        const newArticle = res.data.article
+        this.setState({
+          article: newArticle
+        })
+      })
+      .catch(err => {
+        this.setState({
+          invalidUrl: true
+        })
+      })
   }
 
   render() {
     const article = this.state.article
-    return (
+    return this.state.invalidUrl ? (<Redirect to='/404'/>)
+    : (
       <div>
         <h3>{article.title}</h3>
         <h4><em>{article.belongs_to}</em></h4>
@@ -43,7 +54,6 @@ class Article extends Component {
   }
 
   handleUserModal = (e) => {
-    console.log('clicked')
     this.setState({
       isUserModalVisible: true
     })

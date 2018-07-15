@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import * as api from './api'
 import './App.css';
 
@@ -8,37 +8,55 @@ import Articles from './components/Articles'
 import Article from './components/Article'
 import Topic from './components/Topic'
 import Footer from './components/Footer';
+import Error404 from './components/errorHandling/Error404'
+import Error400 from './components/errorHandling/Error400'
+
 
 class App extends Component {
   state = {
     articles: [],
     userLoggedIn: {
       avatar_url: 'https://cdn3.iconfinder.com/data/icons/black-easy/512/538303-user_512x512.png'
-    }
+    },
+    invalidUrl: false
   }
   
-  async componentDidMount(){
-    const newArticles = await api.getAllArticles()
-    newArticles.sort((a, b) => {
-      const aScore = a.votes + a.comments
-      const bScore = b.votes + b.comments
-      return bScore - aScore
-    })
-    this.setState({
-      articles: newArticles
-    })
+  componentDidMount(){
+    api.getAllArticles()
+      .then(res => {
+        const newArticles = res.data.articles
+        newArticles.sort((a, b) => {
+          const aScore = a.votes + a.comments
+          const bScore = b.votes + b.comments
+          return bScore - aScore
+        })
+        this.setState({
+          articles: newArticles
+        })
+      })
+      .catch(err => {
+        this.setState({
+          invalidUrl: true
+        })
+      })
   }
 
   render() {
-    return (
+    return this.state.invalidUrl 
+    ? <Redirect to="/404" /> 
+    : (
       <div className="App">
         <NavBar logIn={this.logIn} avatar={this.state.userLoggedIn.avatar_url}/>
         <Route exact path='/' render={(props) => <Articles {...props} articles={this.state.articles}/>}/>
         <Route path='/articles/:article_id' render={(props) => <Article  {...props} user={this.state.userLoggedIn}/>}/>
         <Route path='/:topic_slug/articles' render={(props) => <Topic {...props} user={this.state.userLoggedIn}/>}/>
+
+        <Route path="/404" component={Error404} />
+        <Route path="/400" component={Error400} />
+
         <Footer/>
       </div>
-    );
+    )
   }  
 
   logIn = async(e, username) => {

@@ -2,16 +2,13 @@ import axios from 'axios'
 
 export const getAllArticles = () => {
   return axios.get('https://antariess-ncnews.herokuapp.com/api/articles')
-    .then(res => {
-      return res.data.articles
-    })
-    .catch(console.log)
+    
 }
 
 export const getArticleById = (id) => {
   return axios.get(`https://antariess-ncnews.herokuapp.com/api/articles/${id}`)
-    .then(res => res.data.article)
-    .catch(console.log)
+    // .then(res => res.data.article)
+    // .catch(console.log)
 }
 
 export const fetchCommentsByArticleId = (id) => {
