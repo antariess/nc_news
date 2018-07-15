@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-class Error400 extends Component {
+class Error401 extends Component {
   render() {
+    console.log('i render')
     return (
       <div>
         <h4>User not found!</h4>
@@ -11,4 +12,4 @@ class Error400 extends Component {
   }
 }
 
-export default Error400;
+export default Error401;

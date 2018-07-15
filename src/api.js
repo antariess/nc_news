@@ -28,8 +28,6 @@ export const fetchAllTopics = () => {
 
 export const getUserInfo = (username) => {
    return axios.get(`https://antariess-ncnews.herokuapp.com/api/users/${username}`)
-    .then(res => res.data.user)
-    .catch(console.log)
 }
 
 export const upvoteComment = (commentId, direction) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Redirect} from 'react-router-dom'
+import {Route, Redirect, Switch} from 'react-router-dom'
 import * as api from './api'
 import './App.css';
 
@@ -10,15 +10,15 @@ import Topic from './components/Topic'
 import Footer from './components/Footer';
 import Error404 from './components/errorHandling/Error404'
 import Error400 from './components/errorHandling/Error400'
-import ErrorLogIn from './components/errorHandling/ErrorLogIn'
+import Error401 from './components/errorHandling/Error401'
 
 
 
 class App extends Component {
   state = {
     articles: [],
+    incorrectUsername: false,
     userLoggedIn: {
-      incorrectUsername: false,
       avatar_url: 'https://cdn3.iconfinder.com/data/icons/black-easy/512/538303-user_512x512.png'
     },
     invalidUrl: false
@@ -47,18 +47,18 @@ class App extends Component {
   render() {
     return this.state.invalidUrl 
     ? <Redirect to="/404" /> 
-    : this.state.userLoggedIn.incorrectUsername
+    : this.state.incorrectUsername
     ? <Redirect to='/401'/>
     : (
       <div className="App">
         <NavBar logIn={this.logIn} avatar={this.state.userLoggedIn.avatar_url}/>
-        <Route exact path='/' render={(props) => <Articles {...props} articles={this.state.articles}/>}/>
-        <Route path='/articles/:article_id' render={(props) => <Article  {...props} user={this.state.userLoggedIn}/>}/>
-        <Route path='/:topic_slug/articles' render={(props) => <Topic {...props} user={this.state.userLoggedIn}/>}/>
+          <Route exact path='/' render={(props) => <Articles {...props} articles={this.state.articles}/>}/>
+          <Route path='/articles/:article_id' render={(props) => <Article  {...props} user={this.state.userLoggedIn}/>}/>
+          <Route path='/:topic_slug/articles' render={(props) => <Topic {...props} user={this.state.userLoggedIn}/>}/>
 
-        <Route path="/404" component={Error404} />
-        <Route path="/400" component={Error400} />
-        <Route path="/401" component={ErrorLogIn} />
+          <Route path="/404" component={Error404} />
+          <Route path="/400" component={Error400} />
+          <Route path="/401" component={Error401} />
 
         <Footer/>
       </div>
@@ -67,18 +67,18 @@ class App extends Component {
 
   logIn = async(e, username) => {
     e.preventDefault()
-    const user = await api.getUserInfo(username)
-    if(user){
-      this.setState({
-        userLoggedIn: user
+    await api.getUserInfo(username)
+      .then(res => {
+        const user = res.data.user
+        this.setState({
+          userLoggedIn: user
+        })
       })
-    } else {
-      this.setState({
-        userLoggedIn: {
+      .catch(err => {
+        this.setState({
           incorrectUsername: true
-        }
-      })
-    }    
+        })
+      })  
   }
 }
 

@@ -14,6 +14,7 @@ class NavBar extends Component {
 
 
   render() {
+    console.log('navbar renders')
     return (
       <div className="navBar">
         <div className="left">
