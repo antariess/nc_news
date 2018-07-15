@@ -1,7 +1,16 @@
-.article {
-  border-radius: 12px;
-  margin: 7px;
-  padding: 3px;
-  background-color: #EB9645;
-  border: 2px solid #945E2B;
+articles {
+  margin: auto;
+
+}
+
+.topic {
+  display:flex;
+  flex-direction: column;
+}
+
+.topicTitle {
+  font-size: 3em;
+  align-self: center;
+  color: #C2C1C3;
+  
 }

@@ -3,6 +3,8 @@ import {Redirect} from 'react-router-dom'
 import Comment from './Comment';
 import * as api from '../api';
 import NewComment from './CommentNew'
+import 'bulma/css/bulma.css'
+
 
 class Comments extends React.Component {
   state = {
@@ -24,11 +26,13 @@ class Comments extends React.Component {
     return this.state.badRequest
     ? <Redirect to='/400'/>
     : (
-      <div>
+      <div className='container'>
         {this.props.user._id && <NewComment postNewComment={this.postNewComment}/>}
         <ul>
           {this.state.comments.map(comment => {
-            return <Comment key={comment._id} comment={comment} upvoteCall = {this.upvoteCall} user={this.props.user} removeComment={this.removeComment}/>
+            return <li className='box'>
+              <Comment  key={comment._id} comment={comment} upvoteCall = {this.upvoteCall} user={this.props.user} removeComment={this.removeComment}/>
+            </li>
           })}
         </ul>
       </div>

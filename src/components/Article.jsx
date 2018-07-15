@@ -4,6 +4,8 @@ import Comments from './Comments';
 import * as api from '../api';
 import Vote from './Vote';
 import UserModal from './Modals/UserModal';
+import 'bulma/css/bulma.css'
+
 
 class Article extends Component {
   state = {
@@ -35,16 +37,18 @@ class Article extends Component {
     return this.state.invalidUrl ? (<Redirect to='/404'/>)
     : this.state.voteGoneWrong ? (<Redirect to='/400'/>)
     : (
-      <div>
-        <h3>{article.title}</h3>
-        <h4><em>{article.belongs_to}</em></h4>
-        <p>{article.body}</p>
-        <p onClick={this.handleUserModal}>{article.created_by}</p>
-        <span>{this.state.isUserModalVisible && <UserModal username = {article.created_by} closeModal={this.closeModal}/>}</span>     
-        <div>
+      <div className='container'>
+        <div className='box content'>
+          <h3>{article.title}</h3>
+          <h5><em>from {article.belongs_to}</em></h5>
+          <p>{article.body}</p>
+          <p className='is-pulled-right' onClick={this.handleUserModal}><em>created by: {article.created_by}</em></p>
+          <span>{this.state.isUserModalVisible && <UserModal username = {article.created_by} closeModal={this.closeModal}/>}</span>  
+          <div>
           <Vote votes={article.votes} ID={article._id} upvoteCall={this.upvoteCall}/>
-           <span>{article.comments}</span>
-        </div>
+           <span> comments: {article.comments}</span>
+          </div>
+        </div>       
         <Comments user = {this.props.user} id = {this.props.match.params.article_id}/>
       </div>
     );

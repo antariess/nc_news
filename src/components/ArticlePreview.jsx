@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
-import './ArticlePreview.css'
 import UserModal from './Modals/UserModal'
+
+import 'bulma/css/bulma.css'
 
 class ArticlePreview extends React.Component {
   state = {
@@ -12,18 +12,20 @@ class ArticlePreview extends React.Component {
   render() {
     const article = this.props.article
     return (
-      <li className='article'>
-        <Link to={`/articles/${article._id}`}> 
-          <h4>{article.title}</h4>
-        </Link>
-        <h5>from {article.belongs_to}</h5>
-        <p>{`${article.body.substr(0, 150)}...`}</p>
-        <div>
-          <span>{article.comments}</span>
-          <span>{article.votes}</span>
-          <span onClick={this.handleUserModal}>{article.created_by}</span>   
-          <span>{this.state.isUserModalVisible && <UserModal username = {article.created_by} closeModal={this.closeModal}/>}</span>     
-        </div>        
+      <li className='box'>
+        <div className='content'>
+          <Link to={`/articles/${article._id}`}> 
+            <h3>{article.title}</h3>
+          </Link>
+          <h5>from {article.belongs_to}</h5>
+          <p>{`${article.body.substr(0, 150)}...`}</p>
+          <div>
+            <span>comment count: {article.comments}</span>
+            <span> | vote count: {article.votes}</span>
+            <span className='is-pulled-right' onClick={this.handleUserModal}>by: {article.created_by}</span>   
+            <span>{this.state.isUserModalVisible && <UserModal username = {article.created_by} closeModal={this.closeModal}/>}</span>     
+          </div>  
+        </div>      
       </li>
     )
   }

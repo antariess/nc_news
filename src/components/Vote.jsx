@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import * as FA from 'react-icons/lib/fa';
+import 'bulma/css/bulma.css'
+
 
 class Vote extends Component {
   state = {
@@ -7,9 +10,11 @@ class Vote extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.handleUpVote} id='up' ref='up'>{this.state.vote? `voted`: `not voted`}</button>
-        <p>{this.state.vote? this.props.votes +1: this.props.votes}</p>
+      <div className='inline'>        
+        <p>
+        votes: {this.state.vote? this.props.votes +1: this.props.votes} 
+        <span className='inline' onClick={this.handleUpVote} id='up' ref='up'>  {this.state.vote? <FA.FaHeart/>: <FA.FaHeartO/>}</span>
+        </p>
       </div>
     );
   }

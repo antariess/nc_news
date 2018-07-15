@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import * as api from '../api';
 import {Redirect} from 'react-router-dom'
-
 import Articles from './Articles'
 import NewArticle from './ArticleNew'
+import 'bulma/css/bulma.css'
+import './ArticlePreview.css'
 
 class Topic extends Component {
   state = {
@@ -21,8 +22,8 @@ class Topic extends Component {
     ? <Redirect to='/404'/>
     : this.state.redirectToArticle 
     ? <Redirect to={`/articles/${this.state.redirectToArticle}`} /> 
-    : <div>
-        <h2>{this.props.match.params.topic_slug}</h2>
+    : <div className='container topic'>
+        <h2 className='topicTitle'>{this.props.match.params.topic_slug}</h2>
         {this.props.user._id && <button onClick={this.handleNewArticleModal}>post new article</button>}
         {this.state.isNewArticleModalPressed && <NewArticle postNewArticle={this.postNewArticle} closeModal={this.closeModal}/>}
         <Articles articles = {this.state.topicArticles}/>

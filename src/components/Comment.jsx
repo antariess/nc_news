@@ -1,6 +1,8 @@
 import React from 'react'
 import UserModal from './Modals/UserModal'
 import Vote from './Vote'
+import 'bulma/css/bulma.css'
+
 
 class Comment extends React.Component {
   state = {
@@ -10,14 +12,11 @@ class Comment extends React.Component {
   render() {
     const comment = this.props.comment
     return (
-      <li>
-        <p>{comment.body}</p>
-        <p onClick={this.handleUserModal}>{comment.created_by}</p>
-        <span>{this.state.isUserModalVisible && <UserModal username = {comment.created_by} closeModal={this.closeModal}/>}</span>     
-        <div>
+      <li className='flex'>
+        {this.props.user.username === comment.created_by && <button className='button is-dark is-pulled-right is-small' onClick={(e) => {this.props.removeComment(comment._id)}}>Delete</button>}           <p>{comment.body}</p>
+        <p className='is-pulled-right' onClick={this.handleUserModal}><em>by: {comment.created_by}</em></p>
+        <span>{this.state.isUserModalVisible && <UserModal username = {comment.created_by} closeModal={this.closeModal}/>}</span>  
           <Vote votes={comment.votes} ID={comment._id} upvoteCall = {this.props.upvoteCall}/>
-          {this.props.user.username === comment.created_by && <button onClick={(e) => {this.props.removeComment(comment._id)}}>Delete</button>}
-        </div>
       </li>
     )
   }

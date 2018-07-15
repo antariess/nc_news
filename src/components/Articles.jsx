@@ -5,7 +5,7 @@ import "./Articles.css";
 
 const Articles = ({articles}) => {
   return (
-    <ul className="articles">
+    <ul className="articles content">
       {articles.map(article => {
         return (
           <ArticlePreview
