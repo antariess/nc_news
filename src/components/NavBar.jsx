@@ -26,12 +26,6 @@ class NavBar extends Component {
           {this.state.isTopicPressed && <SelectModal closeModal = {this.closeModal}/>}
         </div>
         <div>
-          <form>
-            <input placeholder="search for article" type="text" />
-            <button type="submit">Find!</button>
-          </form>
-        </div>
-        <div>
           <button onClick={() => this.handleModal('isUserPressed')}><img className='image' alt ='button to log in or user avatar' src={this.props.avatar}/></button>
           {this.state.isUserPressed && <NewUSerModal logIn={this.props.logIn} closeModal = {this.closeModal}/>}
         </div>

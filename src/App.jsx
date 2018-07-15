@@ -10,12 +10,15 @@ import Topic from './components/Topic'
 import Footer from './components/Footer';
 import Error404 from './components/errorHandling/Error404'
 import Error400 from './components/errorHandling/Error400'
+import ErrorLogIn from './components/errorHandling/ErrorLogIn'
+
 
 
 class App extends Component {
   state = {
     articles: [],
     userLoggedIn: {
+      incorrectUsername: false,
       avatar_url: 'https://cdn3.iconfinder.com/data/icons/black-easy/512/538303-user_512x512.png'
     },
     invalidUrl: false
@@ -44,6 +47,8 @@ class App extends Component {
   render() {
     return this.state.invalidUrl 
     ? <Redirect to="/404" /> 
+    : this.state.userLoggedIn.incorrectUsername
+    ? <Redirect to='/401'/>
     : (
       <div className="App">
         <NavBar logIn={this.logIn} avatar={this.state.userLoggedIn.avatar_url}/>
@@ -53,6 +58,7 @@ class App extends Component {
 
         <Route path="/404" component={Error404} />
         <Route path="/400" component={Error400} />
+        <Route path="/401" component={ErrorLogIn} />
 
         <Footer/>
       </div>
@@ -62,12 +68,16 @@ class App extends Component {
   logIn = async(e, username) => {
     e.preventDefault()
     const user = await api.getUserInfo(username)
-    if(user._id){
+    if(user){
       this.setState({
         userLoggedIn: user
       })
     } else {
-      console.log('oh noes!!! no such user')
+      this.setState({
+        userLoggedIn: {
+          incorrectUsername: true
+        }
+      })
     }    
   }
 }
