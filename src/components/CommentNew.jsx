@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Comment.css'
 
 class CommentNew extends Component {
   state = {
@@ -7,10 +8,10 @@ class CommentNew extends Component {
 
   render() {
     return (
-      <form onSubmit={(e) => this.props.postNewComment(e, this.state.body)}>
-        <input type='text' placeholder='write your comment here...' onChange={(e) => this.handleOnChange(e, 'body')} value={this.state.body}/>
-        <button type='submit'>Submit</button>
-        <button onClick={this.props.closeModal}>Cancel</button>
+      <form className='box' onSubmit={(e) => this.props.postNewComment(e, this.state.body)}>
+        <input className='input is-medium' type='text' placeholder='write your comment here...' onChange={(e) => this.handleOnChange(e, 'body')} value={this.state.body}/>
+        <button className='button is-dark is-medium submitButton' type='submit'>Submit</button>
+        <button className='button is-dark is-pulled-right is-medium' onClick={this.props.closeModal}>Cancel</button>
       </form>
     );
   }

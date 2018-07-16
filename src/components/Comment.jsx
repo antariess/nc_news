@@ -14,7 +14,7 @@ class Comment extends React.Component {
     return (
       <li className='flex'>
         {this.props.user.username === comment.created_by && <button className='button is-dark is-pulled-right is-small' onClick={(e) => {this.props.removeComment(comment._id)}}>Delete</button>}           <p>{comment.body}</p>
-        <p className='is-pulled-right' onClick={this.handleUserModal}><em>by: {comment.created_by}</em></p>
+        <p className='is-pulled-right' onClick={this.handleUserModal}><em className='has-text-danger'> by: {comment.created_by}</em></p>
         <span>{this.state.isUserModalVisible && <UserModal username = {comment.created_by} closeModal={this.closeModal}/>}</span>  
           <Vote votes={comment.votes} ID={comment._id} upvoteCall = {this.props.upvoteCall}/>
       </li>

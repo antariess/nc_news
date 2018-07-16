@@ -5,6 +5,7 @@ import * as api from '../api';
 import Vote from './Vote';
 import UserModal from './Modals/UserModal';
 import 'bulma/css/bulma.css'
+import './ArticlePreview.css'
 
 
 class Article extends Component {
@@ -34,24 +35,25 @@ class Article extends Component {
 
   render() {
     const article = this.state.article
-    return this.state.invalidUrl ? (<Redirect to='/404'/>)
-    : this.state.voteGoneWrong ? (<Redirect to='/400'/>)
+    return this.state.invalidUrl ? <Redirect to='/404'/>
+    : this.state.voteGoneWrong ? <Redirect to='/400'/>
     : (
-      <div className='container'>
+      <div className='container article'>
         <div className='box content'>
           <h3>{article.title}</h3>
           <h5><em>from {article.belongs_to}</em></h5>
           <p>{article.body}</p>
-          <p className='is-pulled-right' onClick={this.handleUserModal}><em>created by: {article.created_by}</em></p>
-          <span>{this.state.isUserModalVisible && <UserModal username = {article.created_by} closeModal={this.closeModal}/>}</span>  
+          <p className='is-pulled-right' onClick={this.handleUserModal}><em className='has-text-danger'>created by: {article.created_by}</em></p>
+          <span >{this.state.isUserModalVisible && <UserModal  username = {article.created_by} closeModal={this.closeModal}/>}</span>  
           <div>
           <Vote votes={article.votes} ID={article._id} upvoteCall={this.upvoteCall}/>
            <span> comments: {article.comments}</span>
           </div>
-        </div>       
-        <Comments user = {this.props.user} id = {this.props.match.params.article_id}/>
+        </div>      
+        <Comments user = {this.props.user} id = {this.props.match.params.article_id}/> 
       </div>
     );
+    
   }
 
   upvoteCall = (articleID, direction) => {

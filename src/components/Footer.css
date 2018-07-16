@@ -1,0 +1,10 @@
+.footerIcon {
+  margin: 10px;
+}
+
+.footer {
+  max-width: 65vw;
+  border-radius: 7px 7px 0 0;
+  margin: auto;
+  margin-top: 60px;
+}

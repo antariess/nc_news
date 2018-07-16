@@ -14,3 +14,23 @@ articles {
   color: #C2C1C3;
   
 }
+
+.article {
+  width: 65vw;
+}
+
+.newArticleButton {
+  max-width: 65vw;
+  margin: 20px auto;
+  
+}
+
+.newArticleItem {
+  display: block;
+  max-width: 65vw;
+  margin: 10px auto;
+}
+
+.articleInput {
+  display: block;
+}

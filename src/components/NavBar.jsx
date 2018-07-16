@@ -29,13 +29,13 @@ class NavBar extends Component {
           {this.state.isUserPressed && <NewUSerModal logIn={this.props.logIn} closeModal = {this.closeModal}/>}
         </div>
         <div className='navbar-end'>
+          {this.state.isTopicPressed && <SelectModal closeModal = {this.closeModal}/>}
           <button className="button is-outlined is-medium" onClick={() => this.handleModal('isTopicPressed')}>
             <span>Topics</span>
             <span className="icon is-small">
               <FA.FaAngleDown aria-hidden='true'/>
             </span>
-          </button>
-          {this.state.isTopicPressed && <SelectModal closeModal = {this.closeModal}/>}
+          </button>          
         </div>
       </nav>
     );

@@ -23,8 +23,8 @@ class Topic extends Component {
     : this.state.redirectToArticle 
     ? <Redirect to={`/articles/${this.state.redirectToArticle}`} /> 
     : <div className='container topic'>
-        <h2 className='topicTitle'>{this.props.match.params.topic_slug}</h2>
-        {this.props.user._id && <button onClick={this.handleNewArticleModal}>post new article</button>}
+        <h2 className='topicTitle has-text-danger'>{this.props.match.params.topic_slug}</h2>
+        {this.props.user._id && <button className='button is-medium is-outlined newArticleButton' onClick={this.handleNewArticleModal}>post new article</button>}
         {this.state.isNewArticleModalPressed && <NewArticle postNewArticle={this.postNewArticle} closeModal={this.closeModal}/>}
         <Articles articles = {this.state.topicArticles}/>
       </div>

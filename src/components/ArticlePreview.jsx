@@ -22,7 +22,7 @@ class ArticlePreview extends React.Component {
           <div>
             <span>comment count: {article.comments}</span>
             <span> | vote count: {article.votes}</span>
-            <span className='is-pulled-right' onClick={this.handleUserModal}>by: {article.created_by}</span>   
+            <span className='is-pulled-right' onClick={this.handleUserModal}> <em className='has-text-danger'>by: {article.created_by}</em></span>   
             <span>{this.state.isUserModalVisible && <UserModal username = {article.created_by} closeModal={this.closeModal}/>}</span>     
           </div>  
         </div>      

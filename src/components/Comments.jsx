@@ -4,6 +4,7 @@ import Comment from './Comment';
 import * as api from '../api';
 import NewComment from './CommentNew'
 import 'bulma/css/bulma.css'
+import './ArticlePreview.css'
 
 
 class Comments extends React.Component {
@@ -26,7 +27,7 @@ class Comments extends React.Component {
     return this.state.badRequest
     ? <Redirect to='/400'/>
     : (
-      <div className='container'>
+      <div className='container article'>
         {this.props.user._id && <NewComment postNewComment={this.postNewComment}/>}
         <ul>
           {this.state.comments.map(comment => {

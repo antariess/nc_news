@@ -15,9 +15,9 @@ class NewUSerModal extends Component {
             this.props.closeModal('isUserPressed')
             this.props.logIn(e, this.state.inputText)
           }}>
-            <input className='input is-medium' type='text' onChange={this.handleOnChange} value={this.state.inputText} placeholder='Whats your username?'/>
-            <button className='button is-outlined is-medium' type='submit'>Log in!</button>
-            <button className='button is-outlined is-medium' onClick={() => this.props.closeModal('isUserPressed')}>Close</button>
+            <input className='modalItem input is-medium' type='text' onChange={this.handleOnChange} value={this.state.inputText} placeholder='Whats your username?'/>
+            <button className='modalItem button is-outlined is-medium' type='submit'>Log in!</button>
+            <button className='modalItem button is-outlined is-medium' onClick={() => this.props.closeModal('isUserPressed')}>Close</button>
           </form>
         </div>
       </div>

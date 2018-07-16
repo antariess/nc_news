@@ -31,15 +31,15 @@ class SelectModal extends React.Component{
     return this.state.invalidUrl 
     ? <Redirect to='/404'/>
     : (
-      <div className='modal'>
+      <div className='modal' id='select'>
         <div className='modal-background'></div>
-        <div className='modal-content'>
+        <div className='modal-content is-pulled-right'>
           {topics.map(topic => {
-            return <button className='button is-medium is-danger is-inverted link' key={topic.slug}>
-              <Link  to={`/${topic.slug}/articles`} onClick={() => this.props.closeModal('isTopicPressed')}>{topic.title}<br/></Link>
+            return <button className='is-pulled-right modalItem button is-medium is-danger is-inverted link' key={topic.slug}>
+              <Link className='has-text-danger' to={`/${topic.slug}/articles`} onClick={() => this.props.closeModal('isTopicPressed')}>{topic.title}<br/></Link>
               </button>
           })}
-          <button className='button is-medium is-outlined' onClick={() => this.props.closeModal('isTopicPressed')}>Close</button>
+          <button className='is-pulled-right modalItem button is-medium is-outlined' onClick={() => this.props.closeModal('isTopicPressed')}>Close</button>
         </div>
       </div>
     )
