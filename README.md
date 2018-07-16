@@ -9,6 +9,7 @@ You can like an article or comment without being signed in and if you change you
 
 ### Requirements:
     "axios": "^0.18.0",
+    "bulma": "^0.7.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -17,10 +18,10 @@ You can like an article or comment without being signed in and if you change you
     "react-scripts": "1.1.4"
 
 ### Installing and deploying
-When in terminal run npm start in the project's main folder to start locally. The app has been deployed on: http://objective-mccarthy-838b7a.netlify.com
+When in terminal run npm start in the project's main folder to start locally. The app has been deployed on: https://antariess-nc-news.netlify.com/
 
 ### Built using
-React - The JS library used
+React - The JS framework used
 create-react-app
 react-router-dom
 Bulma - The CSS framework used
