@@ -5,7 +5,7 @@ import './Footer.css'
 
 const Footer = () => {
   return (
-    <div class='footer content has-text-centered'>
+    <div className='footer content has-text-centered'>
       <div>
         <h5>created by <strong className='has-text-danger'>Vel Georgieva</strong>, as a part of <a className='has-text-danger' href='https://northcoders.com/'><strong>Northcoders</strong></a> Developer Pathway</h5>
         <p>

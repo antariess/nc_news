@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import 'bulma/css/bulma.css'
 import './NavBar.css'
 import * as FA from 'react-icons/lib/fa'
 
 import SelectModal from "./Modals/SelectModal";
 import NewUSerModal from "./Modals/NewUserModal";
+import UserConetext from '../context'
 
 class NavBar extends Component {
   state = {
@@ -24,7 +24,9 @@ class NavBar extends Component {
             </figure>
           </NavLink>
           <span className="icon icon is-large" onClick={() => this.handleModal('isUserPressed')}>
-            {this.props.avatar ? <img src={this.props.avatar} alt='users avatar'/>: <FA.FaUser size={64}/>} 
+          <UserConetext.Consumer>
+            {user => user.avatar_url ? <img src={user.avatar_url} alt='users avatar'/>: <FA.FaUser size={64}/>}
+          </UserConetext.Consumer>
           </span>
           {this.state.isUserPressed && <NewUSerModal logIn={this.props.logIn} closeModal = {this.closeModal}/>}
         </div>

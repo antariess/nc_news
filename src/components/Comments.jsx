@@ -5,6 +5,7 @@ import * as api from '../api';
 import NewComment from './CommentNew'
 import 'bulma/css/bulma.css'
 import './ArticlePreview.css'
+import UserContext from '../context'
 
 
 class Comments extends React.Component {
@@ -28,11 +29,15 @@ class Comments extends React.Component {
     ? <Redirect to='/400'/>
     : (
       <div className='container article'>
-        {this.props.user._id && <NewComment postNewComment={this.postNewComment}/>}
+        <UserContext.Consumer>
+          {user => {
+            if (user._id) return <NewComment postNewComment={this.postNewComment}/>}
+          }
+        </UserContext.Consumer>
         <ul>
           {this.state.comments.map(comment => {
-            return <li className='box'>
-              <Comment  key={comment._id} comment={comment} upvoteCall = {this.upvoteCall} user={this.props.user} removeComment={this.removeComment}/>
+            return <li className='box' key={comment._id}>
+              <Comment comment={comment} upvoteCall = {this.upvoteCall} removeComment={this.removeComment}/>
             </li>
           })}
         </ul>
@@ -53,18 +58,18 @@ class Comments extends React.Component {
   }
 
   //new comment functionality
-  postNewComment = async(e, body) => {
+  postNewComment = async(e, body, user) => {
     e.preventDefault()
     const articleId = this.props.id
     const comment = {
-      created_by: this.props.user._id,
+      created_by: user._id,
       body,
       belongs_to: articleId
     }
     const postedComment = await api.newComment(articleId, comment)
     if(postedComment){
       this.setState({
-        comments: [{...postedComment, created_by: this.props.user.username}, ...this.state.comments]
+        comments: [{...postedComment, created_by: user.username}, ...this.state.comments]
       })
     } else {
       this.setState({

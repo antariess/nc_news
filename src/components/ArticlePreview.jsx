@@ -2,8 +2,6 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import UserModal from './Modals/UserModal'
 
-import 'bulma/css/bulma.css'
-
 class ArticlePreview extends React.Component {
   state = {
     isUserModalVisible: false
@@ -15,7 +13,7 @@ class ArticlePreview extends React.Component {
       <li className='box'>
         <div className='content'>
           <Link to={`/articles/${article._id}`}> 
-            <h3>{article.title}</h3>
+            <h3 className='has-text-danger'>{article.title}</h3>
           </Link>
           <h5>from {article.belongs_to}</h5>
           <p>{`${article.body.substr(0, 150)}...`}</p>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import * as FA from 'react-icons/lib/fa';
-import 'bulma/css/bulma.css'
 
 
 class Vote extends Component {
@@ -21,7 +20,6 @@ class Vote extends Component {
 
 
   handleUpVote = async(e) => {
-    console.log(this.props.ID)
     if (this.state.vote) {
       this.props.upvoteCall(this.props.ID, 'down')
       this.setState({

@@ -4,9 +4,7 @@ import Comments from './Comments';
 import * as api from '../api';
 import Vote from './Vote';
 import UserModal from './Modals/UserModal';
-import 'bulma/css/bulma.css'
 import './ArticlePreview.css'
-
 
 class Article extends Component {
   state = {
@@ -40,7 +38,7 @@ class Article extends Component {
     : (
       <div className='container article'>
         <div className='box content'>
-          <h3>{article.title}</h3>
+          <h3 className='has-text-danger'>{article.title}</h3>
           <h5><em>from {article.belongs_to}</em></h5>
           <p>{article.body}</p>
           <p className='is-pulled-right' onClick={this.handleUserModal}><em className='has-text-danger'>created by: {article.created_by}</em></p>
@@ -50,7 +48,7 @@ class Article extends Component {
            <span> comments: {article.comments}</span>
           </div>
         </div>      
-        <Comments user = {this.props.user} id = {this.props.match.params.article_id}/> 
+        {article._id && <Comments user = {this.props.user} id = {this.props.match.params.article_id}/> }
       </div>
     );
     

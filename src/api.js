@@ -7,8 +7,6 @@ export const getAllArticles = () => {
 
 export const getArticleById = (id) => {
   return axios.get(`https://antariess-ncnews.herokuapp.com/api/articles/${id}`)
-    // .then(res => res.data.article)
-    // .catch(console.log)
 }
 
 export const fetchCommentsByArticleId = (id) => {
@@ -41,7 +39,6 @@ export const upvoteArticle = (articleID, direction) => {
 }
 
 export const newArticle = (slug, article) => {
-  console.log(slug, article)
   return axios.post(`https://antariess-ncnews.herokuapp.com/api/topics/${slug}/articles`, article)
     .then(res => res.data.newArticle)
     .catch(console.log)

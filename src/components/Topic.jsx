@@ -5,6 +5,7 @@ import Articles from './Articles'
 import NewArticle from './ArticleNew'
 import 'bulma/css/bulma.css'
 import './ArticlePreview.css'
+import UserContext from '../context'
 
 class Topic extends Component {
   state = {
@@ -24,7 +25,12 @@ class Topic extends Component {
     ? <Redirect to={`/articles/${this.state.redirectToArticle}`} /> 
     : <div className='container topic'>
         <h2 className='topicTitle has-text-danger'>{this.props.match.params.topic_slug}</h2>
-        {this.props.user._id && <button className='button is-medium is-outlined newArticleButton' onClick={this.handleNewArticleModal}>post new article</button>}
+        <UserContext.Consumer>
+          {user => {
+            if (user._id) 
+             {return <button className='button is-medium is-outlined newArticleButton' onClick={this.handleNewArticleModal}>post new article</button>}
+          }}
+        </UserContext.Consumer>
         {this.state.isNewArticleModalPressed && <NewArticle postNewArticle={this.postNewArticle} closeModal={this.closeModal}/>}
         <Articles articles = {this.state.topicArticles}/>
       </div>
@@ -69,12 +75,12 @@ class Topic extends Component {
     })
   }
 
-  postNewArticle = async(e, title, body) => {
+  postNewArticle = async(e, title, body, user) => {
     e.preventDefault()
     const slug = this.props.match.params.topic_slug
     const article = {
       title, 
-      created_by: this.props.user._id,
+      created_by: user._id,
       body,
       belongs_to: slug
     }
