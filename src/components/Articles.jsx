@@ -52,6 +52,12 @@ class Articles extends React.Component {
     : this.fetchAllArticles()
   }
 
+  componentDidUpdate(prevProps){
+    if(this.props !== prevProps){
+      this.fetchArticlesByTopic()
+    }
+  }
+
   render(){
     return this.state.invalidUrl
     ? <Redirect to='/404'/>

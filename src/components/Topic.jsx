@@ -9,11 +9,10 @@ import UserContext from '../context'
 
 class Topic extends Component {
   state = {
-    topicArticles: [],
+    slug: this.props.match.params.topic_slug,
     isNewArticleModalPressed: false,
     redirectToArticle: '',
-    errorNewPost: false,
-    invalidUrl: false
+    errorNewPost: false
   }
 
   render() {
