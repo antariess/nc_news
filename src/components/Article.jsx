@@ -50,13 +50,16 @@ class Article extends Component {
         </div>      
         {article._id && <Comments user = {this.props.user} id = {this.props.match.params.article_id}/> }
       </div>
-    );
-    
+    );    
   }
 
   upvoteCall = (articleID, direction) => {
     api.upvoteArticle(articleID, direction)
-      .catch(console.log)
+      .catch(err => {
+        this.setState({
+          voteGoneWrong: true
+        })
+      })
   }
 
   handleUserModal = (e) => {

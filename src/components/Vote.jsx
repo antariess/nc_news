@@ -18,8 +18,7 @@ class Vote extends Component {
     );
   }
 
-
-  handleUpVote = async(e) => {
+  handleUpVote = (e) => {
     if (this.state.vote) {
       this.props.upvoteCall(this.props.ID, 'down')
       this.setState({

@@ -32,34 +32,8 @@ class Topic extends Component {
           }}
         </UserContext.Consumer>
         {this.state.isNewArticleModalPressed && <NewArticle postNewArticle={this.postNewArticle} closeModal={this.closeModal}/>}
-        <Articles articles = {this.state.topicArticles}/>
+        <Articles slug = {this.props.match.params.topic_slug}/>
       </div>
-  }
-
-  fetchArticlesByTopic = async () => {
-    const slug = this.props.match.params.topic_slug
-    await api.getArticlesByTopic(slug)
-      .then(res => {
-        const newArticles = res.data.articles
-        this.setState({
-          topicArticles: newArticles
-        })
-      })
-      .catch(err => {
-        this.setState({
-          invalidUrl:true
-        })
-      })
-  }
-
-  componentDidMount() {
-    this.fetchArticlesByTopic()
-  }
-
-  componentDidUpdate(prevProps) {
-    if(prevProps !== this.props){
-      this.fetchArticlesByTopic()
-    }
   }
 
   //new article functionality

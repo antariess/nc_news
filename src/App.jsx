@@ -15,41 +15,17 @@ import Error401 from './components/errorHandling/Error401'
 
 class App extends Component {
   state = {
-    articles: [],
     incorrectUsername: false,
-    userLoggedIn: {},
-    invalidUrl: false
+    userLoggedIn: {}
   }
-  
-  componentDidMount(){
-    api.getAllArticles()
-      .then(res => {
-        const newArticles = res.data.articles
-        newArticles.sort((a, b) => {
-          const aScore = a.votes + a.comments
-          const bScore = b.votes + b.comments
-          return bScore - aScore
-        })
-        this.setState({
-          articles: newArticles
-        })
-      })
-      .catch(err => {
-        this.setState({
-          invalidUrl: true
-        })
-      })
-  }
-
+ 
   render() {
-    return this.state.invalidUrl 
-    ? <Redirect to="/404" /> 
-    : this.state.incorrectUsername
+    return this.state.incorrectUsername
     ? <Redirect to='/401'/>
     : (
        <div className="App">
         <UserContext.Provider value={this.state.userLoggedIn}>
-            <NavBar logIn={this.logIn}/>
+            <NavBar logIn={this.logIn} logOut={this.logOut}/>
             <Switch>
               <Route path='/articles/:article_id' component={Article}/>
               <Route path='/:topic_slug/articles' component={Topic}/>
@@ -79,6 +55,11 @@ class App extends Component {
           incorrectUsername: true
         })
       })  
+  }
+  logOut = () => {
+    this.setState({
+      userLoggedIn: {}
+    })
   }
 }
 

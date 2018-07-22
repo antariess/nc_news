@@ -9,7 +9,7 @@ class Comment extends React.Component {
   }
 
   render() {
-    const comment = this.props.comment
+    const {comment} = this.props
     return (
       <div className='flex' key={comment._id}>
         <UserContext.Consumer>

@@ -4,7 +4,7 @@ import './NavBar.css'
 import * as FA from 'react-icons/lib/fa'
 
 import SelectModal from "./Modals/SelectModal";
-import NewUSerModal from "./Modals/NewUserModal";
+import NewUserModal from "./Modals/NewUserModal";
 import UserConetext from '../context'
 
 class NavBar extends Component {
@@ -16,8 +16,8 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar" aria-label="main navigation">
-        <div className='navbar-start'>
+      <nav className="navbar flex" aria-label="main navigation">
+        <div className='navbar-start flex'>
           <NavLink exact to="/">
             <figure className="image is-48x48">
               <img src='https://cdn-images-1.medium.com/max/1200/1*LdnSztHVYhhd8K8EqlgCJQ.png' alt="nc news logo" id="logo" />
@@ -28,7 +28,7 @@ class NavBar extends Component {
             {user => user.avatar_url ? <img src={user.avatar_url} alt='users avatar'/>: <FA.FaUser size={64}/>}
           </UserConetext.Consumer>
           </span>
-          {this.state.isUserPressed && <NewUSerModal logIn={this.props.logIn} closeModal = {this.closeModal}/>}
+          {this.state.isUserPressed && <NewUserModal logOut={this.props.logOut} logIn={this.props.logIn} closeModal = {this.closeModal}/>}
         </div>
         <div className='navbar-end'>
           {this.state.isTopicPressed && <SelectModal closeModal = {this.closeModal}/>}
