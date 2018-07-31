@@ -1,5 +1,5 @@
 ## NC News front end project
-This project is created as a block review for the Front End module of Northcoders. As a back end it uses database and api created in the respective nc module found here: https://github.com/antariess/BE-FT-northcoders-news.
+This project is created as a block review for the Front End module of Northcoders. As a back end it uses database and api created in the respective nc module found here: https://github.com/antariess/BE_nc_news.
 
 On the front page all articles are displayed based on popularity which is the sum total of votes and likes. On the nav-bar: logo brings back to homepage, topics button opens a modal which lists all topics available with links to each. User icon brings up authentication, you have to be sineg in to post articles and comments, and to delete the comments posted by the user you are signed in as. As the back end does not offer a robust authentication, you can sign in as either: tricky122, jessjelly, grumpy19, cooljmessy or happyamy2016.
 
